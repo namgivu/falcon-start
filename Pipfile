@@ -6,9 +6,12 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-falcon = "*"
+falcon = "==1.3.0"  # required fix version
+#falcon = "*"  #TODO getting unittest error with version >1.3.0 > AttributeError: 'Test' object has no attribute '_default_headers' at tests.route.gc_intern_1910.test_health.Test.test()
+
 gunicorn = "*"
 httpie = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.6"
