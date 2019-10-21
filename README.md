@@ -7,8 +7,19 @@ pipenv --version  # should be available - you may need to install pipenv ref. bi
 
 # quick start
 ```
-: you@your-machine:/path/to/git-cloned/
-pipenv sync
-PORT=8000; pipenv run  gunicorn  app:api                        -b "0.0.0.0:$PORT"  --reload                          
-                                 #path to falcon api instance   #bind to address    #auto reload api if code changed
+: you@your-machine:/path/to/git-cloned/ $
+    # install packages
+    pipenv --rm; pipenv sync
+    
+    # run api
+    ./run-api.sh
+
+    # run test
+    ./run-test.sh
+
+: you@your-machine $ # on 2nd console prompt, after having `run-api.sh` executed
+    http :6000/something
+
+    http :6000/health
+    http :6000/hi
 ```
