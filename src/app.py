@@ -1,8 +1,8 @@
 import falcon
 
-from route.something import SomeThingResource
-from route.gc_intern_1910.health import GCIntern1910Resource_health
-from route.gc_intern_1910.hi     import GCIntern1910Resource_hi
+from src.route.something import SomeThingResource
+from src.route.gc_intern_1910.health import GCIntern1910Resource_health
+from src.route.gc_intern_1910.hi     import GCIntern1910Resource_hi
 
 
 api = falcon.API()

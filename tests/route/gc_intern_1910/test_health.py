@@ -1,4 +1,4 @@
-from app import api
+from src.app import api
 from falcon import testing
 
 
