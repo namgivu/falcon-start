@@ -18,8 +18,6 @@ RUN python -m pip install wheel
 #endregion ubuntu 16.04 with python ref. https://gist.github.com/monkut/c4c07059444fd06f3f8661e13ccac619
 
 
-#region install THIS_APP
-
 # create THIS_APP folder
 WORKDIR /app
 
@@ -47,6 +45,11 @@ COPY . .
 EXPOSE 6000
 
 # Default command when running container
-#CMD ['/app/run-api.sh']
-CMD tail -F `mktemp`
-#endregion
+# run the api
+CMD cd /app; \
+    pipenv --rm; \
+    pipenv sync; \
+    ./run-api.sh;
+
+# used when debug
+#CMD tail -F `mktemp`

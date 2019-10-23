@@ -27,19 +27,11 @@ pipenv --version  # should be available - you may need to install pipenv ref. bi
 # quick start - with docker
 ```bash
 : you@your-machine:/path/to/git-cloned/ $
-    # build the docker image for this api app i.e. local image namgivu/falcon_start
-    docker build -t namgivu/falcon_start   .
-                 #t aka tag of the image   #build image from :current_folder/Dockerfile
+    # run the api 
+    ./docker-run-api.sh
 
-    # stop if any running container exists
-    c=nn_falcon_start; docker stop $c; docker rm $c
-
-    # run it
-    docker run  --name nn_falcon_start  -d                             namgivu/falcon_start
-                #container name         #run as daemon aka background  #image name
-
-    # aftermath check
-    docker ps | grep nn_falcon_start
+    # view log
+    watch docker logs nn_falcon_start
 ```
 
 #TODO quick start - with docker-compose
