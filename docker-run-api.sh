@@ -15,10 +15,7 @@ docker run  --name nn_falcon_start  -d                             -p $PORT:6000
 
 # aftermath check
 echo
-t=/tmp/dokerps
-    docker ps > $t
-    head -n1 $t
-    grep nn_falcon_start $t
+docker ps | grep -E 'falcon_start|IMAGE'
 echo "
 Container log can be viewed by (press ^C to exit watch)
 watch docker logs nn_falcon_start
