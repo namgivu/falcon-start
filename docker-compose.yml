@@ -5,8 +5,17 @@ services:
     image: namgivu/falcon_start
     container_name: nn_falcon_start  # nn aka namgivu shorthand
 
+    ports:
+      - "${PORT:-6000}:6000"
     volumes:
       - .:/app
 
-    # keep container running ref. https://stackoverflow.com/a/48732671/248616
-    command: tail -F /dev/null
+    restart: always
+
+    command: # multi-line command ref. https://stackoverflow.com/a/55406543/248616
+      - /bin/bash
+      - -c
+      - |
+        cd /app
+          pipenv --rm; pipenv sync
+          ./run-api.sh
