@@ -26,14 +26,27 @@ WORKDIR /app
 # install pipenv
 RUN python -m pip install pipenv
 
+# copy pip packages
+COPY ./Pipfile      .
+COPY ./Pipfile.lock .
+
+# .venv tag - change _a to new value to invalidate .venv/ and force a rerun
+RUN echo 191020_b
+
+# set utf8 to fix error > Click will abort further execution because Python 3 was configured to use ASCII as encoding for the environment  # ref. https://github.com/docker-library/python/issues/13#ref-pullrequest-164133459
+ENV LANG=C.UTF-8
+
+# install app packages
+RUN pipenv --rm; \
+    pipenv sync;
 
 # bundle app source
 COPY . .
 
-# install app packages
-RUN export LC_ALL=C.UTF-8; \
-    export LANG=C.UTF-8; \
-    pipenv --rm; \
-    pipenv sync;
+# for documentation on port
+EXPOSE 6000
 
+# Default command when running container
+#CMD ['/app/run-api.sh']
+CMD tail -F `mktemp`
 #endregion
