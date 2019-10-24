@@ -18,4 +18,4 @@ services:
       - |
         cd /app
           pipenv --rm; pipenv sync
-          ./run-api.sh
+          ./bin/run-api.sh

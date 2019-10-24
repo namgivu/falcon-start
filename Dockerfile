@@ -49,7 +49,7 @@ EXPOSE 6000
 CMD cd /app; \
     pipenv --rm; \
     pipenv sync; \
-    ./run-api.sh;
+    ./bin/run-api.sh;
 
 # used when debug
 #CMD tail -F `mktemp`
