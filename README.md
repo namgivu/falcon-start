@@ -31,14 +31,20 @@ pipenv --version  # should be available - you may need to install pipenv ref. bi
 similar with run directly, but now we run the api as a docker container
 ```bash
 : you@your-machine:/path/to/git-cloned/ $
-    # run the api via docker-compose (recommended)
+    # build the docker image for this api app i.e. local image namgivu/falcon_start
+    ./bin/docker-build-image.sh
+
+    # run the api as container via docker-compose (recommended) - require local image namgivu/falcon_start
     ./bin/docker-compose-run-api.sh
 
-    # run the api via docker run (NOT recommended)
+    # run the api as container via docker run (NOT recommended) - require local image namgivu/falcon_start
     ./bin/docker-run-api.sh
 
-    # view log of the running container - useful when operating  
+    # view log of the running container - useful when monitor/debug the running api  
     watch docker logs nn_falcon_start
+
+    # stop the api container
+    ./bin/docker-stop-api.sh
 ```
 
 ## run endpoints (after api been run)
