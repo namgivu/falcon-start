@@ -3,10 +3,6 @@ s=$BASH_SOURCE ; s=$(dirname "$s") ; s=$(cd "$s" && pwd) ; SCRIPT_HOME="$s"  # g
 a="$SCRIPT_HOME/.." ;                a=$(cd "$a" && pwd) ; APP_HOME="$a"
 
 cd "$APP_HOME"
-    # build the docker image for this api app i.e. local image namgivu/falcon_start
-    docker build -t namgivu/falcon_start   .
-                 #t aka tag of the image   #build image from :current_folder/Dockerfile
-
     # stop if any running container exists
     c=nn_falcon_start; docker stop $c; docker rm $c
 
