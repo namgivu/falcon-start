@@ -12,16 +12,26 @@ pipenv --version  # should be available - you may need to install pipenv ref. bi
     pipenv --rm; pipenv sync
     
     # run api
-    ./run-api.sh
+    ./bin/run-api.sh
 
     # run test
-    ./run-test.sh
+    ./bin/run-test.sh
 
 : you@your-machine $ # on 2nd console prompt, after having `run-api.sh` executed
+    pipenv shell
+
     http :6000/something
 
     http :6000/health
+    http :6000/health/
+
     http :6000/hi
+
+    http :6000/hello/some_name  # with name
+    http :6000/hello/           # without name
+
+    http :6000/hola/some_name   # with name   
+    http :6000/hola/            # without name
 ```
 
 # quick start - with docker
