@@ -1,7 +1,7 @@
 import falcon
 
 from src.route.something import SomeThingResource
-from src.route.gc_intern_1910.health import GCIntern1910Resource_health
+from src.route.gc_intern_1910.health import GCIntern1910Resource_health, GCIntern1910Resource_json_health
 from src.route.gc_intern_1910.hi     import GCIntern1910Resource_hi
 from src.route.gc_intern_1910.hello  import GCIntern1910Resource_hello
 from src.route.gc_intern_1910.hola   import GCIntern1910Resource_hola
@@ -9,10 +9,9 @@ from src.route.gc_intern_1910.hola   import GCIntern1910Resource_hola
 
 api = falcon.API()
 
-#region routing
+#region routing 00 - no json
 api.add_route('/something', SomeThingResource() )
 
-#region gc intern 1910 endpoints
 api.add_route('/health',       GCIntern1910Resource_health() )
 
 api.add_route('/hi',           GCIntern1910Resource_hi() )
@@ -21,6 +20,12 @@ api.add_route('/hello/{name}', GCIntern1910Resource_hello() )  # note cannot cal
 # similar to /hello but allow calling endpoint with empty :name
 api.add_route('/hola',         GCIntern1910Resource_hola() )
 api.add_route('/hola/{name}',  GCIntern1910Resource_hola() )
+
 #endregion
 
-#endregion routing
+
+#region routing 01 - with json
+api.add_route('/json_health',       GCIntern1910Resource_json_health() )
+
+#endregion
+

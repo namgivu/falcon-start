@@ -16,3 +16,9 @@ class Test(testing.TestCase):
     def test(self):
         r = self.simulate_get('/health')
         assert r.status_code == 200
+
+
+    def test2(self):
+        r = self.simulate_get('/json_health')
+        assert r.status_code == 200
+        assert r.json == {}
