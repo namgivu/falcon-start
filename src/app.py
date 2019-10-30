@@ -26,5 +26,13 @@ api.add_route('/hola/{name}',  GCIntern1910Resource_hola() )
 
 #region routing 01 - with json
 api.add_route('/json_health',  GCIntern1910Resource_json_health() )
-#endregion
 
+api.add_route('/json_hello',             GCIntern1910Resource_json_hello_hola() )
+api.add_route('/json_hello/{name}',      GCIntern1910Resource_json_hello_hola() )
+
+api.add_route('/json_hola',              GCIntern1910Resource_json_hello_hola() )
+api.add_route('/json_hola/{name}',       GCIntern1910Resource_json_hello_hola() )
+
+api.add_route('/json_hello_hola',        GCIntern1910Resource_json_hello_hola() )
+api.add_route('/json_hello_hola/{name}', GCIntern1910Resource_json_hello_hola() )
+#endregion
