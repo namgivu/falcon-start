@@ -1,4 +1,5 @@
 import falcon
+import json
 
 
 def say_hi():
@@ -17,3 +18,13 @@ class GCIntern1910Resource_hi():
         r = say_hi()
         resp.status = falcon.HTTP_200
         resp.body   = r
+
+
+class GCIntern1910Resource_json_hi():
+
+    def on_get(self, req, resp):
+        r = {
+            'message': say_hi()
+        }
+        resp.status = falcon.HTTP_200
+        resp.body   = json.dumps(r)
