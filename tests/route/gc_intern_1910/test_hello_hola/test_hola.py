@@ -21,8 +21,14 @@ class Test(testing.TestCase):
 
 
     def test_empty(self):
-        INPUT_name = ''
-        r = self.simulate_get(f'/hola/{INPUT_name}')
+        r = self.simulate_get(f'/hola/')
+        assert r.status_code != 200
+        e=r.json.get('title'); assert e  # e aka exception
+        assert 'Param :name is required' in e
+
+
+    def test_empty2(self):
+        r = self.simulate_get(f'/hola')
         assert r.status_code != 200
         e=r.json.get('title'); assert e  # e aka exception
         assert 'Param :name is required' in e
