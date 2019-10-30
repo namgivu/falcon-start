@@ -13,7 +13,7 @@ class GCIntern1910Resource_fullname():
 
 class GCIntern1910Resource_fullname_via_json_input():
 
-    def on_get(self, req, resp):
+    def on_post(self, req, resp):
         params     = req.media
         first_name = params.get('first_name')
         last_name  = params.get('last_name')

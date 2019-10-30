@@ -41,6 +41,7 @@ api.add_route('/json_hello_hola',        GCIntern1910Resource_json_hello_hola() 
 api.add_route('/json_hello_hola/{name}', GCIntern1910Resource_json_hello_hola() )
 #endregion
 
+
 #region routing 02 - multiple params
 api.add_route('/fullname/{first_name}/{last_name}', GCIntern1910Resource_fullname() )
 api.add_route('/fullname_via_json_input',           GCIntern1910Resource_fullname_via_json_input() )

@@ -28,7 +28,7 @@ class Test(testing.TestCase):
             'first_name': 'fn',
             'last_name' : 'ln',
         }
-        r = self.simulate_get('/fullname_via_json_input', body=json.dumps(INP))
+        r = self.simulate_post('/fullname_via_json_input', body=json.dumps(INP))
         assert r.status_code == 200
         assert r.json == {
             'message': 'fn ln'
