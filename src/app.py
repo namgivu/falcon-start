@@ -1,12 +1,12 @@
 import falcon
 
-from src.route.something import SomeThingResource
+from src.controller.something import SomeThingResource
 
-from src.route.gc_intern_1910.health     import GCIntern1910Resource_health, GCIntern1910Resource_json_health
-from src.route.gc_intern_1910.hi         import GCIntern1910Resource_hi, GCIntern1910Resource_json_hi
-from src.route.gc_intern_1910.hello_hola import GCIntern1910Resource_hello, GCIntern1910Resource_hola, GCIntern1910Resource_json_hello_hola
+from src.controller.gc_intern_1910.health     import GCIntern1910Resource_health, GCIntern1910Resource_json_health
+from src.controller.gc_intern_1910.hi         import GCIntern1910Resource_hi, GCIntern1910Resource_json_hi
+from src.controller.gc_intern_1910.hello_hola import GCIntern1910Resource_hello, GCIntern1910Resource_hola, GCIntern1910Resource_json_hello_hola
 
-from src.route.gc_intern_1910.fullname import GCIntern1910Resource_fullname, GCIntern1910Resource_fullname_via_json_input
+from src.controller.gc_intern_1910.fullname import GCIntern1910Resource_fullname, GCIntern1910Resource_fullname_via_json_input
 
 
 api = falcon.API()
