@@ -45,7 +45,7 @@ COPY . .
 ENV PORT=6000
 
 # for documentation on port
-EXPOSE 6000
+EXPOSE $PORT
 
 # Default command when running container
 # run the api
