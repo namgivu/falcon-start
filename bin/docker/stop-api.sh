@@ -4,5 +4,7 @@ a="$SCRIPT_HOME/.." ;                a=$(cd "$a" && pwd) ; APP_HOME="$a"
 
 cd "$APP_HOME"
     # stop the container ie stop the api app
-    cn='nn_falcon_start'; docker stop $cn && docker rm $cn  # cn aka CONTAINER_NAME
-cd -
+    cn='nn_falcon_start'; # cn aka CONTAINER_NAME
+    docker stop $cn 1>/dev/null 2>&1
+    docker rm   $cn 1>/dev/null 2>&1
+cd - 1>/dev/null

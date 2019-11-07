@@ -10,4 +10,4 @@ cd "$APP_HOME"
 
     # aftermath check
     docker ps | grep -E 'falcon_start|IMAGE'
-cd -
+cd - 1>/dev/null

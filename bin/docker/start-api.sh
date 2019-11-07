@@ -12,7 +12,7 @@ cd "$APP_HOME"
     # run it
     docker run  --name nn_falcon_start  -d                             -p $PORT:6000  namgivu/falcon_start
                 #container name         #run as daemon aka background  #port mapping  #image name
-cd --
+cd - 1>/dev/null
 
 
 # aftermath check

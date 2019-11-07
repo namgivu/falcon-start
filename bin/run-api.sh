@@ -5,7 +5,7 @@ a="$SCRIPT_HOME/.." ;                a=$(cd "$a" && pwd) ; APP_HOME="$a"
 cd "$APP_HOME"
     PORT=6000; pipenv run  gunicorn  src.app:api                    -b "0.0.0.0:$PORT"  --reload
                                      #path to falcon api instance   #bind to address    #auto reload api if code changed
-cd --
+cd - 1>/dev/null
 
 #TODO make this script printing log to file - extra params for :gunicorn as below
 # --timeout 666    --capture-output      --error-logfile=logfile   --access-logfile=logfile  --log-level=debug                        --threads=2                             --worker-connections=2
