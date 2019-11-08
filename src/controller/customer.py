@@ -34,3 +34,20 @@ class CustomerResource(object):
         session.flush(c)  # refresh c to get c.id
         resp.status = falcon.HTTP_200  # This is the default status
         resp.body = json.dumps({'id': c.id})
+
+    def on_put(self, req, resp, id):
+        c = Customer.get(id)  # c aka customer
+        if not c: raise falcon.HTTPBadRequest(f'Customer not found id={id}')
+
+        body = req.media  # json body containing the fields to update
+        name = body.get('name')
+        dob  = body.get('dob')
+
+        if name: c.name = name
+        if dob:  c.dob  = dob
+
+        session.add(c)
+        session.commit()
+
+        resp.status = falcon.HTTP_200  # This is the default status
+        resp.body = json.dumps(c.to_dict())

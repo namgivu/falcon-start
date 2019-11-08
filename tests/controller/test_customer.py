@@ -61,8 +61,27 @@ class Test(testing.TestCase):
         assert r.json == EXP_r
 
         # deeper assert for newly added customer
-        id = EXP_r['id']
-        c = session.query(Customer).filter(Customer.id==id).first()  # c aka customer_added
+        c = Customer.get(id=EXP_r['id'])  # c aka customer_added
         d = c.to_dict()  # d aka c_as_dict
         d.pop('id')  # no :id when compared
         assert d == INP_customer
+
+    def test_update(self):
+        INP_id               = 1
+        INP_fields_to_update = {'id':INP_id, 'name': 'UpdateName', 'dob': '1913-12-11'}  # INP_xxx aka INP of xxx
+
+        c_before_update = Customer.get(id=INP_id)
+
+
+        # testee
+        r = self.simulate_put(f'/customers/{INP_id}', body=json.dumps(INP_fields_to_update))
+
+        assert r.status_code == 200
+
+        #region deep assert customer after updated
+        c = Customer.get(id=INP_id)
+        d = c.to_dict()
+
+        ACTUAL_c = r.json
+        assert ACTUAL_c == d != c_before_update
+        #endregion
