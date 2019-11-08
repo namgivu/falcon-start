@@ -1,14 +1,27 @@
-from src.app import api
+import json
+
+from src.app import api, APP_HOME
 from falcon import testing
+
+from src.model.customer import Customer
+from src.service.postgres import session
 
 
 def setUpModule():    pass  # nothing here for now
 def tearDownModule(): pass  # nothing here for now
 
 
+def make_fixture():
+    seed_db_file = f'{APP_HOME}/../bin/db/seed_db.sql'
+    sql = open(seed_db_file, 'r').read()
+    session.execute(sql)
+
+
 class Test(testing.TestCase):
 
-    def setUp(self):    pass  # nothing here for now
+    def setUp(self):
+        make_fixture()
+
     def tearDown(self): pass  # nothing here for now
 
     app = api
@@ -36,3 +49,20 @@ class Test(testing.TestCase):
 
         assert r.status_code == 200
         assert r.json == EXP_r
+
+    def test_post(self):
+        INP_customer = {'name': 'NewName', 'dob': '1911-12-23'}  # EXP_r aka expected_result
+        EXP_r = {'id': 6}
+
+        # testee
+        r = self.simulate_post('/customers', body=json.dumps(INP_customer))
+
+        assert r.status_code == 200
+        assert r.json == EXP_r
+
+        # deeper assert for newly added customer
+        id = EXP_r['id']
+        c = session.query(Customer).filter(Customer.id==id).first()  # c aka customer_added
+        d = c.to_dict()  # d aka c_as_dict
+        d.pop('id')  # no :id when compared
+        assert d == INP_customer
