@@ -8,6 +8,8 @@ from src.controller.gc_intern_1910.hello_hola import GCIntern1910Resource_hello,
 
 from src.controller.gc_intern_1910.fullname import GCIntern1910Resource_fullname, GCIntern1910Resource_fullname_via_json_input
 
+from src.controller.customer import CustomerResource
+
 
 api = falcon.API()
 
@@ -46,3 +48,8 @@ api.add_route('/json_hello_hola/{name}', GCIntern1910Resource_json_hello_hola() 
 api.add_route('/fullname/{first_name}/{last_name}', GCIntern1910Resource_fullname() )
 api.add_route('/fullname_via_json_input',           GCIntern1910Resource_fullname_via_json_input() )
 #endregion
+
+#region routing 03 - customers CRUD
+api.add_route('/customers',      CustomerResource())
+api.add_route('/customers/{id}', CustomerResource())
+#end
