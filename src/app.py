@@ -1,4 +1,5 @@
 import falcon
+import os
 
 from src.controller.something import SomeThingResource
 
@@ -53,3 +54,5 @@ api.add_route('/fullname_via_json_input',           GCIntern1910Resource_fullnam
 api.add_route('/customers',      CustomerResource())
 api.add_route('/customers/{id}', CustomerResource())
 #end
+
+APP_HOME=os.path.abspath(os.path.dirname(__file__))  # ref. https://stackoverflow.com/a/3283326/248616
