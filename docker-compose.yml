@@ -22,5 +22,5 @@ services:
       # --timeout 666    --capture-output      --error-logfile=logfile   --access-logfile=logfile  --log-level=debug                        --threads=2                             --worker-connections=2
       # #worker timeout  #save output to file  #where to save error log  #where to save access log #TODO remove this and setting from .env  # num of threads for handling requests  # num of simultaneous clients
 
-#TODO api as container with custom API_PORT and DB_USER@DB_PASS@DB_HOST:DB_PORT/DB_NAME
-#TODO add db as postgres with custom DB_PORT
+#TODO api as container with custom param in .env DB_USER@DB_PASS@DB_HOST:DB_PORT/DB_NAME
+#TODO add db as postgres with custom param in .env DB_PORT
