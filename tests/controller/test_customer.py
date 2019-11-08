@@ -72,7 +72,6 @@ class Test(testing.TestCase):
 
         c_before_update = Customer.get(id=INP_id)
 
-
         # testee
         r = self.simulate_put(f'/customers/{INP_id}', body=json.dumps(INP_fields_to_update))
 
@@ -84,4 +83,20 @@ class Test(testing.TestCase):
 
         ACTUAL_c = r.json
         assert ACTUAL_c == d != c_before_update
+        #endregion
+
+    def test_delete(self):
+        INP_id          = 1
+        c_before_delete = Customer.get(id=INP_id)
+
+        # testee
+        r = self.simulate_delete(f'/customers/{INP_id}')
+
+        assert r.status_code == 200
+        assert r.json == {'id': INP_id}
+
+        #region deep assert customer after deleted
+        c_after_delete = Customer.get(id=INP_id)
+        assert c_before_delete     # before, was existed
+        assert not c_after_delete  # after, now been deleted
         #endregion

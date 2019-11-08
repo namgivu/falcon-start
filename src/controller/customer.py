@@ -51,3 +51,13 @@ class CustomerResource(object):
 
         resp.status = falcon.HTTP_200  # This is the default status
         resp.body = json.dumps(c.to_dict())
+
+    def on_delete(self, req, resp, id):
+        c = Customer.get(id)  # c aka customer
+        if not c: raise falcon.HTTPBadRequest(f'Customer not found id={id}')
+
+        session.delete(c)
+        session.commit()
+
+        resp.status = falcon.HTTP_200  # This is the default status
+        resp.body = json.dumps({'id': c.id})
