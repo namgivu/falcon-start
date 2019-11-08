@@ -34,10 +34,6 @@ RUN echo 191020_x
 # set utf8 to fix error > Click will abort further execution because Python 3 was configured to use ASCII as encoding for the environment  # ref. https://github.com/docker-library/python/issues/13#ref-pullrequest-164133459
 ENV LANG=C.UTF-8
 
-# install app packages
-RUN pipenv --rm; \
-    pipenv sync;
-
 # bundle app source
 COPY . .
 

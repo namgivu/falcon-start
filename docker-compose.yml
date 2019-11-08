@@ -3,12 +3,9 @@ version: "3.7"
 services:
   nn_falcon_api:
     image: namgivu/falcon_start
-    container_name: nn_falcon_start  # nn aka namgivu shorthand
-
+    container_name: nn_falcon_start  # nn aka namgivu
     ports:
       - "${PORT:-6000}:6000"
-    volumes:
-      - .:/app
 
     restart: always
 
