@@ -15,3 +15,8 @@ conn    = f'postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
 engine  = create_engine(conn)
 Session = sessionmaker(bind=engine)
 session = Session()  #TODO ensure that by this line, we only open ONE connection per api instance
+
+print(f'''
+[DEBUG] PostgreSQL connection
+{conn}
+''')
