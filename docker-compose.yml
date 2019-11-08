@@ -1,11 +1,21 @@
 version: "3.7"
 
 services:
+  postgres:
+    image: mdillon/postgis #postgres image with postgis ready
+    ports:
+      - ${DB_PORT:-5432}:5432
+    container_name: nn_falcon_start_postgres  # nn aka namgivu
+
+    volumes:
+      - v_postgres:/var/lib/postgresql/data
+    restart: always
+
   api:
     image: namgivu/falcon_start
-    container_name: nn_falcon_start  # nn aka namgivu
     ports:
-      - "${API_PORT:-6000}:6000"
+      - ${API_PORT:-6000}:6000
+    container_name: nn_falcon_start  # nn aka namgivu
 
     restart: always
 
@@ -24,3 +34,6 @@ services:
 
 #TODO api as container with custom param in .env DB_USER@DB_PASS@DB_HOST:DB_PORT/DB_NAME
 #TODO add db as postgres with custom param in .env DB_PORT
+
+volumes:  # NOTE: volume name will have auto-prefix as the containing-folder name  #TODO we need to customize this as same folder will run for multiple gc member on :staging2 host
+  v_postgres:
