@@ -20,7 +20,7 @@ echo
 docker ps | grep -E 'falcon_start|IMAGE'
 echo "
 Container log can be viewed by (press ^C to exit watch)
-$ watch docker logs nn_falcon_start
+$ docker logs -t -f nn_falcon_start
 
-The api is ready to serve when we can see 'Listening at: http://0.0.0.0:$PORT'
+The api is ready to serve when the log reads 'Listening at: http://0.0.0.0:$PORT'
 "

@@ -41,7 +41,7 @@ similar with run directly, but now we run the api as a docker container
     ./bin/docker-run-api.sh
 
     # view log of the running container - useful when monitor/debug the running api  
-    watch docker logs nn_falcon_start
+    $ docker logs -t -f nn_falcon_start
 
     # stop the api container
     ./bin/docker-stop-api.sh

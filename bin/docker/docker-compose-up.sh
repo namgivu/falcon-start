@@ -10,4 +10,11 @@ cd "$APP_HOME"
 
     # aftermath check
     docker ps | grep -E 'falcon_start|IMAGE'
+    echo "
+    Container log can be viewed by (press ^C to exit watch)
+    $ docker logs -t -f nn_falcon_start
+
+    The api is ready to serve when the log reads 'Listening at: http://0.0.0.0:$PORT'
+    "
+
 cd - 1>/dev/null
