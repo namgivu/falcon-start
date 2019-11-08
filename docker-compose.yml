@@ -5,7 +5,7 @@ services:
     image: namgivu/falcon_start
     container_name: nn_falcon_start  # nn aka namgivu
     ports:
-      - "${PORT:-6000}:6000"
+      - "${API_PORT:-6000}:6000"
 
     restart: always
 
@@ -16,7 +16,7 @@ services:
         cd /app
           pipenv --rm
           pipenv sync
-          pipenv run  gunicorn  src.app:api                    -b "0.0.0.0:$PORT"  --reload
+          pipenv run  gunicorn  src.app:api                    -b "0.0.0.0:${API_PORT:-6000}"  --reload
                                 #path to falcon api instance   #bind to address    #auto reload api if code changed
       #TODO make gunicorn run printing log to file - extra params for :gunicorn as below
       # --timeout 666    --capture-output      --error-logfile=logfile   --access-logfile=logfile  --log-level=debug                        --threads=2                             --worker-connections=2

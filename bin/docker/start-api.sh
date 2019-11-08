@@ -3,14 +3,15 @@ s=$BASH_SOURCE ; s=$(dirname "$s") ; s=$(cd "$s" && pwd) ; SCRIPT_HOME="$s"  # g
 a="$SCRIPT_HOME/../.." ;             a=$(cd "$a" && pwd) ; APP_HOME="$a"
 
 cd "$APP_HOME"
+    # amplify if .env exists or not
+    if [[ ! -f "$APP_HOME/.env" ]]; then echo "File not found .env at $APP_HOME"; exit; fi
+    source "$APP_HOME/.env"
+
     # stop if any running container exists
     "$SCRIPT_HOME/stop-api.sh"
 
-    # load custom mapped exposed-port if nay - default 6000 if not specified
-    if [[ -z $PORT ]]; then PORT=6000; fi
-
     # run it
-    docker run  --name nn_falcon_start  -d                             -p $PORT:6000  namgivu/falcon_start
+    docker run  --name nn_falcon_start  -d                             -p $API_PORT:6000  namgivu/falcon_start
                 #container name         #run as daemon aka background  #port mapping  #image name
 cd - 1>/dev/null
 
@@ -22,5 +23,5 @@ echo "
 Container log can be viewed by (press ^C to exit watch)
 $ docker logs -t -f nn_falcon_start
 
-The api is ready to serve when the log reads 'Listening at: http://0.0.0.0:$PORT'
+The api is ready to serve when the log reads 'Listening at: http://0.0.0.0:$API_PORT'
 "
