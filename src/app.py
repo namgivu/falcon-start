@@ -55,4 +55,7 @@ api.add_route('/customers',      CustomerResource())
 api.add_route('/customers/{id}', CustomerResource())
 #end
 
+
+# api.add_error_handler(Exception)  #TODO consider to use this to print specific error instead of 500 Internal Server
+
 APP_HOME=os.path.abspath(os.path.dirname(__file__))  # ref. https://stackoverflow.com/a/3283326/248616
