@@ -5,29 +5,30 @@ TESTCASE_HOME="$SCRIPT_HOME/testcase"
 # load config
 source "$SCRIPT_HOME/config.sh"
 source "$SCRIPT_HOME/util.color.sh"
+source "$SCRIPT_HOME/util.func.sh"
 
 # load testcase
 tc_files=`find $TESTCASE_HOME  -type f  -name 'tc*.sh' `  # tc_files aka testcase_files
 
 # run testcase
-r_all=()  # r aka tc_run_result_all
+b_all=()  # b_all aka boolean_testcase_run_result_all
 for tc_file in ${tc_files[@]}; do
-    tc_name=`echo $tc_file | rev | cut -d'/' -f1 | rev | cut -d'.' -f1`
     pass_or_fail=`eval $tc_file`
-
     b=`if [[ "$pass_or_fail" == "PASS" ]]; then echo "1"; else echo "0"; fi`  # b aka boolean_of_$pass_or_fail
-    r_all+=$b
+    b_all+="$b "
 
-
+    tc_name=`echo $tc_file | rev | cut -d'/' -f1 | rev | cut -d'.' -f1`
     printf "%-55s" "Running testcase $tc_name... "
-    printf "$GR$pass_or_fail$EC"; echo
+    printf "$GR`printPF $b`$EC"; echo
 done
 
-echo "${r_all[@]}"
-exit
-
 # test report
-  testcase='Summary Ticket Result'
-  summary_result=$(($testcase2a & $testcase2b & $testcase2c & $testcase3 & $testcase4 & testcase6a & testcase6b & testcase6c1 & testcase6c2))
-  ticket_result=`if [[ "$summary_result" == "1" ]]; then echo "PASS"; else echo 'FAIL'; fi`; echo "$testcase $ticket_result"
+r=1
+for b in ${b_all[@]}; do
+    r=$(($r & $b))
+done
+echo -e "
+---------------
+aQA result $GR`printPF $r`$EC
 
+"
