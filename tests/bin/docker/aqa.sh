@@ -28,6 +28,10 @@ for tc_file in ${tc_files[@]}; do
 
     # print testee
     if [[ ! -z $testee ]]; then echo "  $testee"; echo; fi
+
+    # rerun again to get verbose output  #TODO add verbose param
+    eval $tc_file
+    echo
 done
 
 # test report
