@@ -2,9 +2,13 @@
 s=$BASH_SOURCE ; s=$(dirname "$s") ; s=$(cd "$s" && pwd) ; SCRIPT_HOME="$s"  # get SCRIPT_HOME=executed script's path, containing folder, cd & pwd to get container path
 a="$SCRIPT_HOME/.." ;                a=$(cd "$a" && pwd) ; APP_HOME="$a"
 
+if [[ ! -f "$APP_HOME/.env" ]]; then echo "File not found .env at $APP_HOME"; exit; fi
+source "$APP_HOME/.env"
+
 cd "$APP_HOME"
-    PORT=6000; pipenv run  gunicorn  src.app:api                    -b "0.0.0.0:$PORT"  --reload
-                                     #path to falcon api instance   #bind to address    #auto reload api if code changed
+    echo "Running API at port=$API_PORT..."
+    pipenv run  gunicorn  src.app:api                    -b "0.0.0.0:$API_PORT"  --reload
+                          #path to falcon api instance   #bind to address       #auto reload api if code changed
 cd - 1>/dev/null
 
 #TODO make this script printing log to file - extra params for :gunicorn as below
