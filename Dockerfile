@@ -37,6 +37,9 @@ ENV LANG=C.UTF-8
 # bundle app source
 COPY . .
 
+# copy .env used for dockerized mode
+COPY ./bin/docker/.env .
+
 # for documentation on port
 EXPOSE 8000
 
