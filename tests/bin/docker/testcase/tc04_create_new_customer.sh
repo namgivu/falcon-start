@@ -9,7 +9,7 @@ endpoint='customers'
 method='POST'; endpoint='customers'; params=`cat << EOF
 name='Trang' dob='2018-10-10'
 EOF`
-testee="http --print=h  $method :$api_port/$endpoint  $params"
+testee="http --print=h  $method :$API_PORT/$endpoint  $params"
 
 # get actual
 status_code=`$testee | head -n1 | cut -d ' ' -f2`
