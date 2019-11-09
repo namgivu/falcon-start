@@ -4,7 +4,7 @@ services:
   postgres:
     image: mdillon/postgis #postgres image with postgis ready
     ports:
-      - ${DB_PORT:-5432}:5432
+      - ${DB_PORT:-7777}:5432
     container_name: nn_falcon_start_postgres  # nn aka namgivu
 
     volumes:
