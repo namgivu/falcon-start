@@ -52,16 +52,16 @@ similar with run directly, but now we run the api as a docker container
 : you@your-machine $ # on 2nd console prompt, after having `run-api.sh` executed
     pipenv shell
 
-    http :6000/something
+    http :8000/something
 
-    http :6000/health
-    http :6000/health/
+    http :8000/health
+    http :8000/health/
 
-    http :6000/hi
+    http :8000/hi
 
-    http :6000/hello/some_name  # with name
-    http :6000/hello/           # without name
+    http :8000/hello/some_name  # with name
+    http :8000/hello/           # without name
 
-    http :6000/hola/some_name   # with name   
-    http :6000/hola/            # without name
+    http :8000/hola/some_name   # with name   
+    http :8000/hola/            # without name
 ```

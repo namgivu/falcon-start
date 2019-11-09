@@ -14,7 +14,7 @@ services:
   api:
     image: namgivu/falcon_start
     ports:
-      - ${API_PORT:-6000}:6000
+      - ${API_PORT:-8888}:8000
     container_name: nn_falcon_start  # nn aka namgivu
 
     restart: always

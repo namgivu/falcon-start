@@ -37,18 +37,15 @@ ENV LANG=C.UTF-8
 # bundle app source
 COPY . .
 
-# use environ PORT if any; default to be 6000
-ENV PORT=6000
-
 # for documentation on port
-EXPOSE $PORT
+EXPOSE 8000
 
 # Default command when running container
 # run the api
 CMD cd /app; \
     pipenv --rm; \
     pipenv sync; \
-    pipenv run  gunicorn  src.app:api                    -b "0.0.0.0:$PORT"  --reload
+    pipenv run  gunicorn  src.app:api                    -b "0.0.0.0:8000"  --reload
                           #path to falcon api instance   #bind to address    #auto reload api if code changed
 
     #TODO make gunicorn run printing log to file - extra params for :gunicorn as below
