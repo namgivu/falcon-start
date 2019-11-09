@@ -4,16 +4,18 @@ DOCKER_TEST_HOME="$SH/../"
 
 source "$DOCKER_TEST_HOME/config.sh"
 
-# testcase arguments
+# testee
 endpoint='customers'
 method='POST'; endpoint='customers'; params=`cat << EOF
 name='Trang' dob='2018-10-10'
 EOF`
+testee="http --print=h  $method :$api_port/$endpoint  $params"
 
 # get actual
-status_code=`http --print=h  $method :$api_port/$endpoint  $params | head -n1 | cut -d ' ' -f2`
-       body=`http --print=b  $method :$api_port/$endpoint  $params | head -n1`
+status_code=`$testee | head -n1 | cut -d ' ' -f2`
+       body=`$testee | head -n1`
 
+# get PASS / FAIL
 python 1>/dev/null 2>&1 << EOF
 # run multi-line python code in bash script ref. https://stackoverflow.com/a/40143212/12300953
 
@@ -34,3 +36,6 @@ except:
 EOF
 
 has_error="$?"; if [[ $has_error == '0' ]]; then echo 'PASS'; else echo 'FAIL'; fi
+
+# print testee
+echo "$testee"
