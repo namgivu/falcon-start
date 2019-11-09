@@ -18,7 +18,7 @@ pytest-dotenv = "*"  # autoload .env when running test
 
 # for postgres db
 sqlalchemy = "*"
-psycopg2 = "==2.7.7"
+psycopg2-binary = "==2.7.7"
 
 [requires]
 python_version = "3.6"
