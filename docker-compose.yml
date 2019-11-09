@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   postgres:
-    image: mdillon/postgis #postgres image with postgis ready
+    image: mdillon/postgis  # postgres image with postgis ready
     ports:
       - ${DB_PORT:-7777}:5432
     container_name: nn_falcon_start_postgres  # nn aka namgivu
@@ -19,21 +19,7 @@ services:
 
     restart: always
 
-    command: # multi-line command ref. https://stackoverflow.com/a/55406543/248616
-      - /bin/bash
-      - -c
-      - |
-        cd /app
-          pipenv --rm
-          pipenv sync
-          pipenv run  gunicorn  src.app:api                    -b "0.0.0.0:${API_PORT:-6000}"  --reload
-                                #path to falcon api instance   #bind to address    #auto reload api if code changed
-      #TODO make gunicorn run printing log to file - extra params for :gunicorn as below
-      # --timeout 666    --capture-output      --error-logfile=logfile   --access-logfile=logfile  --log-level=debug                        --threads=2                             --worker-connections=2
-      # #worker timeout  #save output to file  #where to save error log  #where to save access log #TODO remove this and setting from .env  # num of threads for handling requests  # num of simultaneous clients
-
 #TODO api as container with custom param in .env DB_USER@DB_PASS@DB_HOST:DB_PORT/DB_NAME
-#TODO add db as postgres with custom param in .env DB_PORT
 
 volumes:  # NOTE: volume name will have auto-prefix as the containing-folder name  #TODO we need to customize this as same folder will run for multiple gc member on :staging2 host
   v_postgres:
