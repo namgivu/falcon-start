@@ -8,11 +8,11 @@ source "$DOCKER_TEST_HOME/config.sh"
 method='PUT'; endpoint='customers/3'; params=`cat << EOF
 name='Son'
 EOF`
-testee="http --print=h  $method :$API_PORT/$endpoint  $params"
+testee=" $method :$API_PORT/$endpoint  $params"
 
 # get actual
-status_code=`$testee | head  -n1 | cut -d' ' -f2`
-       body=`$testee | head  -n1`
+status_code=`http --print=h $testee | head  -n1 | cut -d' ' -f2`
+       body=`http --print=b $testee | head  -n1`
 
 
 # get PASS / FAIL
@@ -25,6 +25,10 @@ EXP_body ={"id": 3, "name": "Son", "dob": "2018-03-04", "updated_at": "2019-08-1
 
 # compare with the actual
 status_code=$status_code
+if status_code!=200:
+    print('FAIL')
+    import sys; sys.exit(1)
+
 body=$body
 try:
     assert EXP_status == status_code
@@ -38,4 +42,6 @@ EOF
 has_error="$?"; if [[ $has_error == '0' ]]; then echo 'PASS'; else echo 'FAIL'; fi
 
 # print testee
-echo "$testee"
+echo "$testee" | xargs
+echo "$status_code"
+echo "$body"
