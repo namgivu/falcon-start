@@ -13,6 +13,8 @@ tc_files=`find $TESTCASE_HOME  -type f  -name 'tc*.sh' | sort`  # tc_files aka t
 # run testcase
 b_all=()  # b_all aka boolean_testcase_run_result_all
 for tc_file in ${tc_files[@]}; do
+    #TODO reset test fixture
+
     # run testcase aka tc
     tc_run=`eval $tc_file`
     pass_or_fail=`echo "$tc_run" | cut -d$'\n' -f1`  # cut by newline ref. https://stackoverflow.com/a/21757210/248616
