@@ -13,7 +13,8 @@ status_code=`http --print=h $testee | head -n1 | cut -d ' ' -f2`
        body=`http --print=b $testee`
 
 # get PASS / FAIL
-python 1>/dev/null 2>&1 << EOF
+#cat << EOF                     # use this when you want to debug below python code
+python 1>/dev/null 2>&1 << EOF  # use this to run
 # run multi-line python code in bash script ref. https://stackoverflow.com/a/40143212/12300953
 
 # define expected values
@@ -36,9 +37,9 @@ body=$body
 try:
     assert EXP_status == status_code
     assert EXP_body == body
-    print('PASS')
+    import sys; sys.exit(0)
 except:
-    print('FAIL')
+    import sys; sys.exit(1)
 EOF
 
 has_error="$?"; if [[ $has_error == '0' ]]; then echo 'PASS'; else echo 'FAIL'; fi

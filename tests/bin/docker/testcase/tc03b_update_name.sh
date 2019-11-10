@@ -16,7 +16,8 @@ status_code=`http --print=h $testee | head  -n1 | cut -d' ' -f2`
 
 
 # get PASS / FAIL
-python 1>/dev/null 2>&1 << EOF
+#cat << EOF                     # use this when you want to debug below python code
+python 1>/dev/null 2>&1 << EOF  # use this to run
 # run multi-line python code in bash script ref. https://stackoverflow.com/a/40143212/12300953
 
 # define expected values
