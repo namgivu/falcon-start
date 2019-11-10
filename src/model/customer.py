@@ -37,4 +37,6 @@ class Customer(Base):
             'id'  : self.id,
             'name': self.name,
             'dob' : self.dob.strftime('%Y-%m-%d'),
+
+            'updated_at' : self.updated_at.strftime('%Y-%m-%d %H:%M:%S') if self.updated_at else '',
         }

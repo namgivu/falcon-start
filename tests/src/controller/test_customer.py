@@ -4,7 +4,7 @@ from src.app import api, APP_HOME
 from falcon import testing
 
 from src.model.customer import Customer
-from src.service.postgres import session
+from src.service.postgres import get_session
 
 
 def setUpModule():    pass  # nothing here for now
@@ -14,7 +14,10 @@ def tearDownModule(): pass  # nothing here for now
 def make_fixture():
     seed_db_file = f'{APP_HOME}/../bin/db/seed_db.sql'
     sql = open(seed_db_file, 'r').read()
+    session = get_session()
     session.execute(sql)
+    session.commit()
+    session.close()
 
 
 class Test(testing.TestCase):
@@ -28,11 +31,11 @@ class Test(testing.TestCase):
 
     def test_get_all(self):
         EXP_r = [  # EXP_r aka expected_result
-            {'id': 1, 'name': 'Name01', 'dob': '2018-01-02'},
-            {'id': 2, 'name': 'Name02', 'dob': '2018-03-03'},
-            {'id': 3, 'name': 'Name03', 'dob': '2018-03-04'},
-            {'id': 4, 'name': 'Name04', 'dob': '2018-04-05'},
-            {'id': 5, 'name': 'Name05', 'dob': '2018-05-06'},
+            {'id': 1, 'name': 'Name01', 'dob': '2018-01-02', 'updated_at': '2019-08-12 04:05:01'},
+            {'id': 2, 'name': 'Name02', 'dob': '2018-02-03', 'updated_at': '2019-08-13 05:06:01'},
+            {'id': 3, 'name': 'Name03', 'dob': '2018-03-04', 'updated_at': '2019-08-14 06:07:01'},
+            {'id': 4, 'name': 'Name04', 'dob': '2018-04-05', 'updated_at': '2019-08-15 07:08:01'},
+            {'id': 5, 'name': 'Name05', 'dob': '2018-05-06', 'updated_at': '2019-08-16 08:09:01'},
         ]
 
         # testee
@@ -42,13 +45,14 @@ class Test(testing.TestCase):
         assert r.json == EXP_r
 
     def test_get_at_id(self):
-        EXP_r = {'id': 1, 'name': 'Name01', 'dob': '2018-01-02'}  # EXP_r aka expected_result
+        EXP_r = {'id': 1, 'name': 'Name01', 'dob': '2018-01-02', 'updated_at': '2019-08-12 04:05:01'}  # EXP_r aka expected_result
 
         # testee
         r = self.simulate_get('/customers/1')
 
         assert r.status_code == 200
         assert r.json == EXP_r
+
 
     def test_post(self):
         INP_customer = {'name': 'NewName', 'dob': '1911-12-23'}  # EXP_r aka expected_result
@@ -63,7 +67,8 @@ class Test(testing.TestCase):
         # deeper assert for newly added customer
         c = Customer.get(id=EXP_r['id'])  # c aka customer_added
         d = c.to_dict()  # d aka c_as_dict
-        d.pop('id')  # no :id when compared
+        d.pop('id')          # no :id         when compared
+        d.pop('updated_at')  # no :updated_at when compared
         assert d == INP_customer
 
     def test_update(self):
