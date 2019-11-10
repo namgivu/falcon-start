@@ -13,7 +13,7 @@ testee=" $method :$API_PORT/$endpoint  $params"
 
 # get actual
 status_code=`http --print=h $testee | head -n1 | cut -d ' ' -f2`
-       body=`http --print=b $testee | head -n1`
+       body=`http --print=b $testee`
 
 # get PASS / FAIL
 python 1>/dev/null 2>&1 << EOF
