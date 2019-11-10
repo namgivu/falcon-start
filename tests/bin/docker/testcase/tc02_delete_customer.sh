@@ -1,6 +1,6 @@
 #!/bin/bash
 s=$BASH_SOURCE ; s=$(dirname "$s") ; s=$(cd "$s" && pwd) ; SH="$s";  # get SH=executed script's path, containing folder, cd & pwd to get container path
-DOCKER_TEST_HOME="$SH/../"
+DOCKER_TEST_HOME="$SH/.."
 
 source "$DOCKER_TEST_HOME/config.sh"
 
