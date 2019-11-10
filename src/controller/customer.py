@@ -17,6 +17,7 @@ class CustomerResource(object):
         resp.status = falcon.HTTP_200  # This is the default status
         resp.body = json.dumps(d)
 
+
     def on_post(self, req, resp):
         body = req.media  # json body containing the :customer to create
 
@@ -30,13 +31,15 @@ class CustomerResource(object):
 
         session = get_session()
         session.add(c)
-        session.commit()
+        session.commit()  # this command will fill :id field
 
-        session.flush(c)  # refresh c to get c.id
-        session.close()
+        # make result :r with c.id
+        r = {'id': c.id}
 
         resp.status = falcon.HTTP_200  # This is the default status
-        resp.body = json.dumps({'id': c.id})
+        resp.body = json.dumps(r)
+
+        session.close()  # .close() go last to dodge ERROR: sqlalchemy.orm.exc.DetachedInstanceError: Instance <Customer at 0x7fb5ea668278> is not bound to a Session; attribute refresh operation cannot proceed (Background on this error at: http://sqlalche.me/e/bhk3)
 
 
     def on_put(self, req, resp, id):
@@ -53,10 +56,11 @@ class CustomerResource(object):
         session = get_session()
         session.add(c)
         session.commit()
-        session.close()
 
         resp.status = falcon.HTTP_200  # This is the default status
         resp.body = json.dumps(c.to_dict())
+
+        session.close()  # .close() go last to dodge ERROR: sqlalchemy.orm.exc.DetachedInstanceError: Instance <Customer at 0x7fb5ea668278> is not bound to a Session; attribute refresh operation cannot proceed (Background on this error at: http://sqlalche.me/e/bhk3)
 
     def on_delete(self, req, resp, id):
         c = Customer.get(id)  # c aka customer
