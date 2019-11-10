@@ -14,7 +14,11 @@ v=os.environ.get('DB_NAME'); DB_NAME = v if v else 'nn_falcon_start'  #TODO when
 conn    = f'postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
 engine  = create_engine(conn)
 Session = sessionmaker(bind=engine)
-session = Session()  #TODO ensure that by this line, we only open ONE connection per api instance
+
+def get_session():
+    session = Session()
+    return session
+
 
 print(f'''
 [DEBUG] PostgreSQL connection

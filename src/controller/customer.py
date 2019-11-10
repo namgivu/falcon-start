@@ -2,7 +2,7 @@ import json
 import falcon
 
 from src.model.customer import Customer
-from src.service.postgres import session
+from src.service.postgres import get_session
 
 
 class CustomerResource(object):
@@ -28,12 +28,16 @@ class CustomerResource(object):
         assert c.name
         assert c.dob
 
+        session = get_session()
         session.add(c)
         session.commit()
 
         session.flush(c)  # refresh c to get c.id
+        session.close()
+
         resp.status = falcon.HTTP_200  # This is the default status
         resp.body = json.dumps({'id': c.id})
+
 
     def on_put(self, req, resp, id):
         c = Customer.get(id)  # c aka customer
@@ -46,8 +50,10 @@ class CustomerResource(object):
         if name: c.name = name
         if dob:  c.dob  = dob
 
+        session = get_session()
         session.add(c)
         session.commit()
+        session.close()
 
         resp.status = falcon.HTTP_200  # This is the default status
         resp.body = json.dumps(c.to_dict())
@@ -56,8 +62,10 @@ class CustomerResource(object):
         c = Customer.get(id)  # c aka customer
         if not c: raise falcon.HTTPBadRequest(f'Customer not found id={id}')
 
+        session = get_session()
         session.delete(c)
         session.commit()
+        session.close()
 
         resp.status = falcon.HTTP_200  # This is the default status
         resp.body = json.dumps({'id': c.id})

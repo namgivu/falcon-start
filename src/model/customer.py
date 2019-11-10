@@ -1,7 +1,7 @@
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Integer, Text, Column, Date, DateTime
 
-from src.service.postgres import session
+from src.service.postgres import get_session
 
 
 Base = declarative_base()
@@ -16,12 +16,16 @@ class Customer(Base):
 
     @staticmethod
     def get(id):
+        session = get_session()
         r = session.query(Customer).filter(Customer.id == id).first()
+        session.close()
         return r
 
     @staticmethod
     def get_all():
+        session = get_session()
         r = session.query(Customer).all()
+        session.close()
         return r
 
 
