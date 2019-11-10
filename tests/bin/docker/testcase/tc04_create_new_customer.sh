@@ -12,8 +12,9 @@ EOF`
 testee=" $method :$API_PORT/$endpoint  $params"
 
 # get actual
-status_code=`http --print=h $testee | head -n1 | cut -d ' ' -f2`
-       body=`http --print=b $testee`
+          r=`http --print=bh $testee`
+status_code=`echo "$r" | head -n1 | cut -d ' ' -f2`
+       body=`echo "$r" | tail -n1`
 
 # get PASS / FAIL
 #cat << EOF                     # use this when you want to debug below python code
