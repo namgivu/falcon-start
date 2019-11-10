@@ -37,19 +37,19 @@ ENV LANG=C.UTF-8
 # bundle app source
 COPY . .
 
-# copy .env used for dockerized mode
+# copy .env used for dockerized mode - NOTE this .env is in folder bin/docker/ and to link the api container with the postgres container
 COPY ./bin/docker/.env .
 
 # for documentation on port
 EXPOSE 8000
 
 # Default command when running container
-# run the api
+# Run the api at 8000
 CMD cd /app; \
     pipenv --rm; \
     pipenv sync; \
-    pipenv run  gunicorn  src.app:api                    -b "0.0.0.0:8000"  --reload
-                          #path to falcon api instance   #bind to address    #auto reload api if code changed
+    pipenv run  gunicorn  src.app:api                    -b "0.0.0.0:8000"        --reload
+                          #path to falcon api instance   #bind to address:port    #auto reload api if code changed
 
     #TODO make gunicorn run printing log to file - extra params for :gunicorn as below
     # --timeout 666    --capture-output      --error-logfile=logfile   --access-logfile=logfile  --log-level=debug                        --threads=2                             --worker-connections=2

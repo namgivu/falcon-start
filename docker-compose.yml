@@ -14,12 +14,10 @@ services:
   api:
     image: namgivu/falcon_start
     ports:
-      - ${API_PORT:-8888}:8000
+      - ${API_PORT:-8888}:8000  # this api will use db from container nn_falcon_start_postgres:5432  having same network
     container_name: nn_falcon_start  # nn aka namgivu
 
     restart: always
-
-#TODO api as container with custom param in .env DB_USER@DB_PASS@DB_HOST:DB_PORT/DB_NAME
 
 volumes:  # NOTE: volume name will have auto-prefix as the containing-folder name  #TODO we need to customize this as same folder will run for multiple gc member on :staging2 host
   v_postgres:
