@@ -40,6 +40,6 @@ EOF
 has_error="$?"; if [[ $has_error == '0' ]]; then echo 'PASS'; else echo 'FAIL'; fi
 
 # print testee
-echo "$testee" | xargs
-echo "$status_code"
-echo "$body"
+echo "$testee"      | xargs
+echo "$status_code" | xargs
+echo "$body"        | xargs
