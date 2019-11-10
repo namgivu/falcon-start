@@ -6,19 +6,19 @@ source "$DOCKER_TEST_HOME/config.sh"
 
 # testee
 method='PUT'; endpoint='customers/3'; params=`cat << EOF
-name="Son"
+name=Son
 EOF`
-testee="$method :$API_PORT/$endpoint  $params"
+testee="$method :$API_PORT/$endpoint  $params"  #TODO how to have $params with single-quote or double-quote  ie  name='Son' or name="Son"; currently we have to use name=Son
 
 # get actual
-          r=`http --print=bh $testee`
+          r=`http --print=bh $testee`  #TODO if name="Son" in $params, httpie will take double-quote as a name's character \" - how to solve this?
 status_code=`echo "$r" | head -n1 | cut -d ' ' -f2`
        body=`echo "$r" | tail -n1`
 
 
 # get PASS / FAIL
-cat << EOF                     # use this when you want to debug below python code
-#python 1>/dev/null 2>&1 << EOF  # use this to run
+#cat << EOF                     # use this when you want to debug below python code
+python 1>/dev/null 2>&1 << EOF  # use this to run
 # run multi-line python code in bash script ref. https://stackoverflow.com/a/40143212/12300953
 
 # define expected values
