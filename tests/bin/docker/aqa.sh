@@ -47,9 +47,9 @@ for tc_file in ${tc_files[@]}; do
     s=3; echo "Sleep $s seconds to get db ready..."; sleep $s
 
     # run testcase aka tc
-    tc_run=`eval $tc_file`
-    pass_or_fail=`echo "$tc_run" | cut -d$'\n' -f1`  # cut by newline ref. https://stackoverflow.com/a/21757210/248616
-          testee=`echo "$tc_run" | cut -d$'\n' -f2`
+    tc_run=`mktemp`; eval $tc_file 1>$tc_run 2>&1;  # run the testcase and store output to $tc_run
+    pass_or_fail=`cat $tc_run | cut -d$'\n' -f1`  # cut by newline ref. https://stackoverflow.com/a/21757210/248616
+          testee=`cat $tc_run | cut -d$'\n' -f2`
 
     tc_name=`echo $tc_file | rev | cut -d'/' -f1 | rev | cut -d'.' -f1`
     echo; printf "%-55s" "Running testcase $tc_name... "
@@ -63,7 +63,7 @@ for tc_file in ${tc_files[@]}; do
     if [[ ! -z $testee ]]; then echo "$testee"; echo; fi
 
     # rerun again to get verbose output  #TODO add verbose param
-    echo "[VERBOSE DEBUG]"; eval $tc_file
+    echo "[VERBOSE DEBUG]"; cat $tc_run
     if [[ $pass_or_fail == 'FAIL' ]]; then
         echo "
 More error detail by below command
