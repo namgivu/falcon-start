@@ -40,6 +40,7 @@ try:
     import sys; sys.exit(0)
 except:
     import sys; sys.exit(1)
+
 EOF
 
 has_error="$?"; if [[ $has_error == '0' ]]; then echo 'PASS'; else echo 'FAIL'; fi

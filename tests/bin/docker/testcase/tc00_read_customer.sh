@@ -31,9 +31,9 @@ body=$body
 try:
     assert EXP_status == status_code
     assert EXP_body == body
-    print('PASS')
+    import sys; sys.exit(0)
 except:
-    print('FAIL')
+    import sys; sys.exit(1)
 
 EOF
 

@@ -32,9 +32,9 @@ try:
     assert EXP_status == status_code
     assert EXP_body == body
     #TODO Trang more deeper assert ref. https://github.com/namgivu/falcon-start/blob/gc-intern-1910/tests/controller/test_customer.py#L88
-    print('PASS')
+    import sys; sys.exit(0)
 except:
-    print('FAIL')
+    import sys; sys.exit(1)
 
 EOF
 
