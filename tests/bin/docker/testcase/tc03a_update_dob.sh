@@ -8,7 +8,7 @@ source "$DOCKER_TEST_HOME/config.sh"
 method='PUT'; endpoint='customers/4'; params=`cat << EOF
 dob='2011-11-11'
 EOF`
-testee=" $method :$API_PORT/$endpoint  $params"
+testee="$method :$API_PORT/$endpoint  $params"
 
 # get actual
           r=`http --print=bh $testee`

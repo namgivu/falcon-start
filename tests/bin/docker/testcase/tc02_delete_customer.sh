@@ -6,7 +6,7 @@ source "$DOCKER_TEST_HOME/config.sh"
 
 # testee
 method='DELETE'; endpoint='customers/2'
-testee=" $method :$API_PORT/$endpoint"
+testee="$method :$API_PORT/$endpoint"
 
 # get actual
           r=`http --print=bh $testee`

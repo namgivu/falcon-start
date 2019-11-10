@@ -9,7 +9,7 @@ endpoint='customers'
 method='POST'; endpoint='customers'; params=`cat << EOF
 name='Trang' dob='2018-10-10'
 EOF`
-testee=" $method :$API_PORT/$endpoint  $params"
+testee="$method :$API_PORT/$endpoint  $params"
 
 # get actual
           r=`http --print=bh $testee`
