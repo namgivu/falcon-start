@@ -36,7 +36,7 @@ try:
     assert EXP_body == body
     #TODO Trang more deeper assert for newly inserted row ref. https://github.com/namgivu/falcon-start/blob/gc-intern-1910/tests/controller/test_customer.py#L53
     import sys; sys.exit(0)
-except:
+except Exception as e:
     import sys; sys.exit(1)
 
 EOF

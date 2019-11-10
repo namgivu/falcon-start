@@ -37,7 +37,7 @@ try:
     assert EXP_status == status_code
     assert EXP_body == body
     import sys; sys.exit(0)
-except:
+except Exception as e:
     import sys; sys.exit(1)
 
 EOF
