@@ -27,7 +27,6 @@ EXP_body ={"id": 3, "name": "Son", "dob": "2018-03-04", "updated_at": "2019-08-1
 # compare with the actual
 status_code=$status_code
 if status_code!=200:
-    print('FAIL')
     import sys; sys.exit(1)
 
 body=$body

@@ -24,7 +24,6 @@ EXP_body ={"id": 2}
 # compare with the actual
 status_code=$status_code
 if status_code!=200:
-    print('FAIL')
     import sys; sys.exit(1)
 
 body=$body
