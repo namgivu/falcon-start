@@ -5,17 +5,19 @@ TESTCASE_HOME="$SCRIPT_HOME/testcase"
 docstring="
 
 # get docker-compose up
-~/NN/code/_NN_/falcon-start2/bin/docker/docker-build.sh ; ~/NN/code/_NN_/falcon-start2/bin/docker/docker-compose-up.sh
+cd /path/to/falcon-start/
+    ./bin/docker/docker-build.sh
+    ./bin/docker/docker-compose-up.sh
 
 # after docker-compose is up
-    bash prompt 01 - mornitor psql
+    bash prompt 01 - monitor psql
     docker logs -t -f nn_falcon_start_postgres
 
-    bash prompt 02 - mornitor api
+    bash prompt 02 - monitor api
     docker logs -t -f nn_falcon_start
 
-    bash prompt 03 - mornitor db rows
-    watch http --print=b GET :8888/customers/1
+    bash prompt 03 - monitor db rows
+    watch http --print=b GET :8888/customers
 
     bash prompt 04 - run aQA aka automation QA on the api endpoints
     : /path/to/falcon-start /tests/bin/docker
