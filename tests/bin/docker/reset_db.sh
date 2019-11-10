@@ -18,7 +18,7 @@ echo; echo "Copy seed_db.sql to $c_postgres:$c_path..."
 
 echo; echo "Reset database..."
     # close all current connection
-    $PSQL "$DB_CONNECTION" -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '$DB_NAME';" ;
+    $PSQL "$DB_CONNECTION" -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '$DB_NAME';" 1>/dev/null;
 
     # drop then create db
     $PSQL "$DB_CONNECTION" -c "DROP DATABASE if exists $DB_NAME;"

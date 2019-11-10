@@ -3,7 +3,8 @@
  DB_PORT=7777
 API_PORT=8888
 
-DB_CONTAINER=`docker ps | grep $DB_PORT | rev | cut -d' ' -f1 | rev`  # get container name from DB_PORT
+ DB_CONTAINER=`docker ps | grep $DB_PORT  | rev | cut -d' ' -f1 | rev`  # get container name from DB_PORT
+API_CONTAINER=`docker ps | grep $API_PORT | rev | cut -d' ' -f1 | rev`  # get container name from API_PORT
 
 #region config db
     docstring='
