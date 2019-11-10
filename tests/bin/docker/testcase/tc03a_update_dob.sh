@@ -39,9 +39,9 @@ except Exception as e:
 
 EOF
 
-has_error="$?"; if [[ $has_error == '0' ]]; then echo 'PASS'; else echo 'FAIL'; fi
+has_error="$?"; if [[ $has_error == '0' ]]; then echo 'PASS'; else echo 'FAIL'; fi  # print testcase result PASS/FAIL
 
-# print testee
+# debug testee info
 echo "$testee"      | xargs
 echo "$status_code" | xargs
 echo "$body"        | xargs
