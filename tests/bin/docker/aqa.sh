@@ -8,19 +8,21 @@ docstring="
 ~/NN/code/_NN_/falcon-start2/bin/docker/docker-build.sh ; ~/NN/code/_NN_/falcon-start2/bin/docker/docker-compose-up.sh
 
 # after docker-compose is up
-    prompt 01
+    bash prompt 01 - mornitor psql
     docker logs -t -f nn_falcon_start_postgres
 
-    prompt 02
+    bash prompt 02 - mornitor api
     docker logs -t -f nn_falcon_start
 
-    prompt 03
+    bash prompt 03 - mornitor db rows
     watch http --print=b GET :8888/customers/1
 
-    prompt 04
+    bash prompt 04 - run aQA aka automation QA on the api endpoints
     : /path/to/falcon-start /tests/bin/docker
     ./aqa.sh
 "
+
+if [[ ! -f "$SCRIPT_HOME/config.sh" ]]; then echo "File not found config.sh"; exit; fi
 
 # load config
 source "$SCRIPT_HOME/config.sh"
@@ -28,13 +30,9 @@ source "$SCRIPT_HOME/util.color.sh"
 source "$SCRIPT_HOME/util.func.sh"
 
 # load testcase
-select_testcase='tc00*.sh'  # select tc00
-select_testcase='tc01*.sh'  # select tc01
-select_testcase='tc02*.sh'  # select tc02
-select_testcase='tc03a*.sh'  # select tc03a
-select_testcase='tc03b*.sh'  # select tc03b
-
-select_testcase='tc*.sh'    # select all tc
+select_testcase='tcXYX*.sh'  # select tcXYZ
+select_testcase='tc01*.sh'   # select tc01
+select_testcase='tc*.sh'     # select all tc
 
 tc_files=`find $TESTCASE_HOME  -type f  -name $select_testcase | sort`  # tc_files aka testcase_files
 
