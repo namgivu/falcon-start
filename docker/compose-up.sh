@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 s=$BASH_SOURCE ; s=$(dirname "$s") ; s=$(cd "$s" && pwd) ; SCRIPT_HOME="$s"  # get SCRIPT_HOME=executed script's path, containing folder, cd & pwd to get container path
-a="$SCRIPT_HOME/.." ;             a=$(cd "$a" && pwd) ; APP_HOME="$a"
 
 # run container from the built image namgivu/falcon_start
 docker-compose  -f "$SCRIPT_HOME/docker-compose.yml"  up  --force-recreate  -d  # start api at port :PORT
