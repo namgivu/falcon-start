@@ -11,5 +11,5 @@ docker ps | grep -E 'falcon_start|IMAGE'
 
 echo "
 view running container log; ctrl-z to quit log
-cd $sh; source ./config.sh; docker-compose up; cd - 1>/dev/null
+cd $SCRIPT_HOME; source ./config.sh; docker-compose up; cd - 1>/dev/null
 "
