@@ -8,11 +8,11 @@ cd "$APP_HOME"
     source "$APP_HOME/.env"
 
     # stop if any running container exists
-    "$SCRIPT_HOME/stop-api.sh"
+    "$SCRIPT_HOME/stop-rm.sh"
 
     # run it
-    docker run  --name nn_falcon_start  -d                             -p $API_PORT:8000  namgivu/falcon_start
-                #container name         #run as daemon aka background  #port mapping  #image name
+    docker run  --name nn_falcon_start  -d                         -p $API_PORT:8000  namgivu/falcon_start
+                #container name         #run as background daemon  #port mapping      #image name
 cd - 1>/dev/null
 
 
