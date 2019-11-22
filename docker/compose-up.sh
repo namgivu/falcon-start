@@ -13,4 +13,3 @@ echo "
 view running container log; ctrl-z to quit log
 cd $sh; source ./config.sh; docker-compose up; cd - 1>/dev/null
 "
-
