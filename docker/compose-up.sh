@@ -10,6 +10,6 @@ docker-compose  -f "$SCRIPT_HOME/docker-compose.yml"  up  --force-recreate  -d  
 docker ps | grep -E 'falcon_start|IMAGE'
 
 echo "
-view running container log; ctrl-z to quit log
-cd $SCRIPT_HOME; source ./config.sh; docker-compose up; cd - 1>/dev/null
+view running container log; ctrl-c to quit log
+cd $SCRIPT_HOME; docker-compose logs -f;  cd - 1>/dev/null
 "
