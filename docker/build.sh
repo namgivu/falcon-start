@@ -12,7 +12,7 @@ cd "$APP_HOME"
     # build the docker image for this api app i.e. local image namgivu/falcon_start
     docker build -t namgivu/falcon_start   .
                  #t aka tag of the image   #build image from :current_folder/Dockerfile
-cd -- 1>/dev/null
+cd - 1>/dev/null
 
 # aftermath check
 echo
