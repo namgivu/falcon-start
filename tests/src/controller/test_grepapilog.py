@@ -10,6 +10,6 @@ def client(): return testing.TestClient(api)
 
 
 def test(client):
-    r = client.simulate_get('/health')
+    r = client.simulate_get('/grepapilog')
     assert r.status_code == 200
     assert r.json  == {}
