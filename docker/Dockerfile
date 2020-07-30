@@ -10,4 +10,4 @@ RUN pipenv sync
 RUN echo 200730_x
 COPY . .
 
-CMD PYTHONPATH=`pwd`  pipenv run  gunicorn  -b 0.0.0.0:5000   src.app:api
+CMD PYTHONPATH=`pwd`  pipenv run  gunicorn  -b 0.0.0.0:5000   src.app:api 2>&1  | tee -a ./tmp/log
