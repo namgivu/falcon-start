@@ -1,8 +1,0 @@
-.idea/
-
-.venv/
-**.pytest_cache/
-
-.env
-
-tests/bin/docker/config.sh
