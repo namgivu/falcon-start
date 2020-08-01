@@ -1,6 +1,10 @@
-import falcon as falcon
+import falcon
+import json
+import traceback
 
 from src.controller.health import Health
+from src.controller.fail import Fail
+
 
 api = falcon.API()
 
