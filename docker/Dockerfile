@@ -13,4 +13,5 @@ RUN pipenv sync
 RUN echo 200730_x
 COPY . .
 
-CMD PYTHONPATH=`pwd`  pipenv run  gunicorn  -b 0.0.0.0:5000   src.app:api 2>&1  | tee -a ./tmp/log
+CMD PYTHONPATH=`pwd`  pipenv run  gunicorn  -b 0.0.0.0:5000   src.app:api   --log-level debug   2>&1  | tee -a ./tmp/log
+#   .                 .           .         serve at port     api instance  .                   store std+err stream to log file
