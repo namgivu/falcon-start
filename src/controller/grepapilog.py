@@ -15,8 +15,5 @@ class GrepApiLog:
         #       .          .   .    .                         binary to string
         #endregion
 
-        #region grep :apilog into :log
-        log = r.split('\n')
-        #endregion
-
-        resp.body = json.dumps(log)
+        resp.body = r
+        resp.status_code = falcon.HTTP_OK
