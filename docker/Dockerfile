@@ -1,9 +1,6 @@
 # ubuntu 20.04 with python 3.8 w/ pipenv ref. https://github.com/namgivu/ubuntu-pipenv
 FROM namgivu/ubuntu-pipenv:20.04-3.8
 
-# set timezone ref. https://askubuntu.com/a/182536/22308
-RUN ln -sf /usr/share/zoneinfo/Asia/Singapore /etc/localtime
-
 WORKDIR /app
 EXPOSE 5000
 
