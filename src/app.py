@@ -1,10 +1,22 @@
 import falcon
+from falcon_cors import CORS
 import json
 import traceback
 
 from src.controller.health import Health
 from src.controller.fail import Fail
 
+
+middleware = []
+
+#region allow all cors origins+methods ref. https://stackoverflow.com/a/60036107/248616
+cors = CORS(
+    allow_all_origins=True,
+    allow_all_headers=True,
+    allow_all_methods=True,
+)
+middleware.append(cors.middleware)  # ref. https://github.com/lwcolton/falcon-cors#usage
+#endregion
 
 api = falcon.API()
 
