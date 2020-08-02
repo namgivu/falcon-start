@@ -2,6 +2,8 @@ import falcon
 from falcon_cors import CORS
 import json
 import traceback
+import logging
+from pprint import pformat
 
 from src.controller.health import Health
 from src.controller.fail import Fail
@@ -41,9 +43,14 @@ def replace_internal_server_5000(ex, req, resp, params):  # ex aka exception, re
     empty_k = [ k for k,v in r.items() if v is None ]
     for k in empty_k: r.pop(k)
 
-    # conclusion
+    # conclusion @ endpoint result
     resp.status = falcon.HTTP_400
     resp.body   = json.dumps(r)
 
+    # conclusion @ print to console ref. https://stackoverflow.com/a/5191885/248616
+    logging.exception(pformat(r))
+
+
 api.add_error_handler(Exception, handler=replace_internal_server_5000)
+
 #endregion replace_internal_server_5000
