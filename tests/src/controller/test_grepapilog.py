@@ -33,6 +33,10 @@ def test(client):
         ''').strip())
     #endregion make apilog fixture
 
+    r=client.simulate_get('/grepapilog'); assert r.status_code==200; log=r.text
+    assert 'Starting gunicorn'                 in log
+    assert 'Listening at: http://0.0.0.0:5000' in log
+
     grep_regex=''; r=client.simulate_get('/grepapilog', body=json.dumps({'grep -E': grep_regex})); assert r.status_code==200; log=r.text
     assert 'Starting gunicorn'                 in log
     assert 'Listening at: http://0.0.0.0:5000' in log
